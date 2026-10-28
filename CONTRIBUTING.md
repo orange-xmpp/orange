@@ -2,7 +2,8 @@
 
 ## Workflow
 
-- Every change goes through a pull request against `master`.
+- Every change goes through a pull request against `dev`. `master`
+  only receives `dev` when a release is made.
 - A pull request needs two approvals; at least one from a maintainer for
   changes to architecture (module interfaces, the agent socket protocol,
   storage interfaces, the build system).
@@ -10,6 +11,12 @@
   manual, man pages, NEWS for user-visible changes).
 - CI must pass: `make distcheck` with `--enable-werror`, on the minimum
   and the newest supported compiler.
+- No code that does not work gets into version control. Every commit
+  builds and passes `make check`, also on your own branches, so that
+  any commit can be checked out, tested and bisected.
+- Keep a pull request under 1000 changed lines. Reviewers read small
+  pull requests carefully and large ones quickly; split a large change
+  into steps that each work on their own.
 
 ## Developer Certificate of Origin
 
@@ -17,6 +24,23 @@ Sign off every commit (`git commit -s`), certifying the
 [Developer Certificate of Origin](https://developercertificate.org/):
 you wrote the change, or have the right to submit it under the license
 of the files it touches.
+
+## AI tools
+
+Code is written by people. Do not let an AI agent write code for
+Orange, and do not paste code from an AI reply into your change; this
+covers source files, tests, build files and scripts.
+
+You are welcome to ask an AI anything: to explain an RFC, a compiler
+error or a part of the code, or to suggest approaches. Then write the
+code yourself.
+
+Reviews are done by people too. Do not ask an AI to review a pull
+request, your own or anyone else's, and do not post AI-generated review
+comments.
+
+Documentation (ADRs, specs, the manual, man pages) may be written with
+the help of AI.
 
 ## Licenses
 
