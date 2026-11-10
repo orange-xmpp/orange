@@ -70,4 +70,3 @@ to the link.
 | [0009](0009-module-loading.md) | How server modules are built and loaded | Proposed | #119 | |
 | [0010](0010-agent-protocol-framing.md) | Agent socket protocol framing and versioning | Proposed | #120 | |
 | [0011](0011-jid-precis.md) | JID parsing and PRECIS normalization | Proposed | #121 | |
-| [0012](0012-abuse-protection.md) | Abuse protection and rate limits | Proposed | #123 | |

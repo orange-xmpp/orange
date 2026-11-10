@@ -165,7 +165,7 @@ The outgoing queue has a byte limit, a setting ([0003](0003-configuration.md)).
 A peer that does not read its socket makes the queue grow; when it passes the
 limit, the connection is closed with the `policy-violation` stream error. This
 keeps one slow or hostile client from making the server buffer without bound
-(see [0012](0012-abuse-protection.md)).
+(see #123).
 
 ### Blocking work (#25)
 
@@ -243,8 +243,8 @@ keeps one slow or hostile client from making the server buffer without bound
   - The `shards` and blocking-pool settings in the configuration
     ([0003](0003-configuration.md)).
   - A TSan build in CI for oranged (#70), run with several shards.
-  - Abuse protection ([0012](0012-abuse-protection.md)) builds on the outgoing
-    queue limits and idle deadlines.
+  - Abuse protection (#123) builds on the outgoing queue limits and idle
+    deadlines.
   - A load target (users online, messages per second) and a latency budget (for
     example, p99 server-side delivery time), with a benchmark that measures
     them.
