@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 The Orange authors
+
+# Pushing a tag vX.Y.Z runs 'make distcheck' and attaches the resulting
+# orange-X.Y.Z.tar.xz and its SHA-256 sum to a new GitHub release.  The
+# tag must match the version in AC_INIT (configure.ac).
+
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release ${{ github.ref_name }}
+    runs-on: ubuntu-24.04
+    container: debian:trixie
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            g++ make autoconf automake libtool pkgconf \
+            texinfo xz-utils ca-certificates git \
+            libexpat1-dev libssl-dev libsqlite3-dev libasio-dev catch2
+      - uses: actions/checkout@v7
+      - name: Generate the build system
+        run: ./autogen.sh
+      - name: Configure
+        run: ./configure
+      - name: Check the tag against the version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(./configure --version | sed -n '1s/.* //p')
+          if [ "$TAG" != "v$version" ]; then
+            echo "Tag $TAG does not match version $version in configure.ac" >&2
+            exit 1
+          fi
+      - name: make distcheck
+        run: make -j"$(nproc)" distcheck
+      - name: Checksum
+        run: sha256sum orange-*.tar.xz >SHA256SUMS
+      - name: Create the release
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            orange-*.tar.xz
+            SHA256SUMS
+          fail_on_unmatched_files: true
+          generate_release_notes: true
