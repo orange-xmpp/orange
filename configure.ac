@@ -2,8 +2,8 @@
 # SPDX-FileCopyrightText: 2026 The Orange authors
 AC_PREREQ([2.71])
 AC_INIT([orange], [0.0.1],
-  [https://github.com/mb6ockatf/orange/issues], [orange],
-  [https://github.com/mb6ockatf/orange])
+  [https://github.com/orange-xmpp/orange/issues], [orange],
+  [https://github.com/orange-xmpp/orange])
 AC_CONFIG_SRCDIR([lib/version.cpp])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIRS([m4])
