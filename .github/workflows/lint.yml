@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 The Orange authors
+
+# actionlint also runs shellcheck on every 'run:' step.
+
+name: Lint
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  ACTIONLINT_VERSION: 1.7.12
+
+jobs:
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check the shell scripts
+        run: |
+          shellcheck --version
+          shellcheck autogen.sh tests/*.sh
+
+  actionlint:
+    name: actionlint
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install actionlint
+        run: |
+          curl -sSfL -o download-actionlint.bash \
+            "https://raw.githubusercontent.com/rhysd/actionlint/v$ACTIONLINT_VERSION/scripts/download-actionlint.bash"
+          bash download-actionlint.bash "$ACTIONLINT_VERSION"
+      - name: Check the workflows
+        run: ./actionlint -color
