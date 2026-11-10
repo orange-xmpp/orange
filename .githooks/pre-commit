@@ -1,0 +1,31 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 The Orange authors
+
+# Rewrap the staged Markdown files under docs/adr/ to 80 columns.
+# Both the staged version and the working tree copy are rewrapped, so
+# changes you have not staged stay unstaged.
+#
+# Enable once per clone: git config core.hooksPath .githooks
+
+set -e
+
+top=$(git rev-parse --show-toplevel)
+wrap="$top/.githooks/md-wrap.awk"
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+
+git diff --cached --name-only --diff-filter=ACMR -- 'docs/adr/*.md' |
+while IFS= read -r file; do
+	mode=$(git ls-files --stage -- "$file" | cut -d ' ' -f 1)
+	git show ":$file" | awk -f "$wrap" > "$tmp"
+	blob=$(git hash-object -w "$tmp")
+	if [ "$blob" != "$(git rev-parse ":$file")" ]; then
+		git update-index --cacheinfo "$mode,$blob,$file"
+		echo "pre-commit: rewrapped $file to 80 columns"
+	fi
+	if [ -f "$top/$file" ]; then
+		awk -f "$wrap" "$top/$file" > "$tmp"
+		cmp -s "$tmp" "$top/$file" || cat "$tmp" > "$top/$file"
+	fi
+done

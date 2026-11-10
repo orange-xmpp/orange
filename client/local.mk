@@ -19,11 +19,13 @@ client_core_libclientcore_la_SOURCES = \
 	client/core/socket_path.hpp
 
 client_agent_orange_agent_SOURCES = client/agent/main.cpp
-client_agent_orange_agent_CPPFLAGS = $(AM_CPPFLAGS) $(SQLITE3_CFLAGS)
+client_agent_orange_agent_CPPFLAGS = $(AM_CPPFLAGS) $(SQLITE3_CFLAGS) \
+	$(LIBSECRET_CFLAGS)
 client_agent_orange_agent_LDADD = \
 	client/core/libclientcore.la \
 	lib/liborange.la \
-	$(SQLITE3_LIBS)
+	$(SQLITE3_LIBS) \
+	$(LIBSECRET_LIBS)
 
 client_cli_orange_cli_SOURCES = \
 	client/cli/main.cpp \

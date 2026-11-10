@@ -1,5 +1,7 @@
 The Orange authors:
 
-  mb6ockatf          architecture, project management
+  mb6ockatf          architecture, project management, shared library, S2S
+  grgii749           orange-client, orange-daemon, UI
+  d1mark2            oranged, databases, S2S
 
 Add yourself here in your first pull request.

@@ -1,21 +1,58 @@
 orange -- blazingly fast XMPP server and client in C++
+======================================================
 
 Orange is an XMPP server and a command-line XMPP client for GNU/Linux.
 It is in early development: the programs build and answer --help and
 --version, but do nothing else yet.
 
 Components
-==========
+----------
 
   oranged        the XMPP server                     server/
   orange-agent   per-user daemon holding the client's
                  XMPP sessions, on a unix socket      client/agent/
   orange-cli     subcommands and an interactive mode,
-                 talking to orange-agent              client/cli/, client/repl/
+                 talking to orange-agent              client/cli/,
+                                                      client/repl/
   liborange      protocol code shared by both         lib/
 
-Licenses
-========
+Requirements
+------------
+
+You need a C++23 compiler (GCC 14 or later, or Clang 18 or later with
+libstdc++ 14), expat, OpenSSL 3, SQLite 3, standalone asio, libsecret
+(for the client) and, for the unit tests, Catch2 3.  On Debian:
+
+    nala install g++ autoconf automake libtool pkgconf texinfo \
+      libexpat1-dev libssl-dev libsqlite3-dev libasio-dev catch2 \
+      libsecret-1-dev
+
+Building and installing
+-----------------------
+
+From a git checkout:
+
+    ./autogen.sh
+    ./configure
+    make -j"$(nproc)"
+    make check
+
+Release tarballs already contain configure, so skip ./autogen.sh there.
+See INSTALL for the generic instructions and "info orange" (or
+docs/orange.texi) for the Orange-specific configure options.
+
+Contributing
+------------
+
+See CONTRIBUTING.md.
+
+Reporting bugs
+--------------
+
+Report bugs at <https://github.com/mb6ockatf/orange/issues>.
+
+Copying
+-------
 
   server/   GNU Affero General Public License, version 3 or later
             (COPYING.AGPL)
@@ -27,30 +64,3 @@ Licenses
             Back-Cover Texts (COPYING.DOC)
 
 Every source file names its license in an SPDX-License-Identifier line.
-
-Building
-========
-
-You need a C++23 compiler (GCC 14 or later, or Clang 18 or later with
-libstdc++ 14), expat, OpenSSL 3, SQLite 3, standalone asio and, for the
-unit tests, Catch2 3.  On Debian:
-
-  nala install g++ autoconf automake libtool pkgconf texinfo \
-    libexpat1-dev libssl-dev libsqlite3-dev libasio-dev catch2
-
-From a git checkout:
-
-  ./autogen.sh
-  ./configure
-  make -j"$(nproc)"
-  make check
-
-Release tarballs already contain configure, so skip ./autogen.sh there.
-See INSTALL for the generic instructions and "info orange" (or
-docs/orange.texi) for the Orange-specific configure options.
-
-Contributing
-============
-
-See CONTRIBUTING.md.  Report bugs at
-<https://github.com/mb6ockatf/orange/issues>.

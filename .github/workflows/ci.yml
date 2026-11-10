@@ -44,7 +44,8 @@ jobs:
           apt-get install -y --no-install-recommends \
             ${{ matrix.packages }} make autoconf automake libtool pkgconf \
             texinfo xz-utils ca-certificates git \
-            libexpat1-dev libssl-dev libsqlite3-dev libasio-dev catch2
+            libexpat1-dev libssl-dev libsqlite3-dev libasio-dev catch2 \
+            libsecret-1-dev
       - uses: actions/checkout@v7
       - name: Generate the build system
         run: ./autogen.sh

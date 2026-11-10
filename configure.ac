@@ -28,6 +28,8 @@ AM_CONDITIONAL([ENABLE_CLIENT], [test "x$enable_client" = xyes])
 PKG_CHECK_MODULES([EXPAT], [expat >= 2.5])
 PKG_CHECK_MODULES([OPENSSL], [openssl >= 3.0])
 PKG_CHECK_MODULES([SQLITE3], [sqlite3 >= 3.40])
+AS_IF([test "x$enable_client" = xyes],
+  [PKG_CHECK_MODULES([LIBSECRET], [libsecret-1 >= 0.21])])
 AC_LANG_PUSH([C++])
 AC_CHECK_HEADER([asio.hpp], [],
   [AC_MSG_ERROR([standalone asio (asio.hpp) is required; on Debian install libasio-dev])])

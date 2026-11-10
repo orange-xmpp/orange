@@ -81,6 +81,23 @@ make distcheck
 Unit tests are Catch2 programs in `tests/`, run through automake's TAP
 driver; add new ones to `tests/local.mk`.
 
+## Git hooks
+
+Enable the project's hooks once per clone:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+The pre-commit hook rewraps the Markdown files under `docs/adr/` to 80
+columns with `.githooks/md-wrap.awk`; headings, tables, HTML comments,
+block quotes and code blocks stay as they are. Changes you have not
+staged stay unstaged. To rewrap a file by hand:
+
+```sh
+awk -f .githooks/md-wrap.awk FILE > FILE.new && mv FILE.new FILE
+```
+
 ## Layout
 
 Each component keeps its build rules in its own `local.mk`, included by
