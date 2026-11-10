@@ -59,7 +59,7 @@ to the link.
 
 | ADR | Title | Status | Issue | Russian |
 |---|---|---|---|---|
-| [0001](0001-error-handling.md) | Error handling | Accepted | #2 | |
+| [0001](0001-error-handling.md) | Error handling | Proposed | #2 | |
 | [0002](0002-concurrency.md) | Concurrency model | Proposed | #3 | |
 | [0003](0003-configuration.md) | Configuration format for the server and the client | Proposed | #8 | |
 | [0004](0004-monorepo-autotools.md) | Keep everything in one repository, built with Autotools | Proposed | #114 | |
@@ -70,3 +70,4 @@ to the link.
 | [0009](0009-module-loading.md) | How server modules are built and loaded | Proposed | #119 | |
 | [0010](0010-agent-protocol-framing.md) | Agent socket protocol framing and versioning | Proposed | #120 | |
 | [0011](0011-jid-precis.md) | JID parsing and PRECIS normalization | Proposed | #121 | |
+| [0012](0012-abuse-protection.md) | Abuse protection and rate limits | Proposed | #123 | |
