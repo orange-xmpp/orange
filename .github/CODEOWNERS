@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# SPDX-FileCopyrightText: 2026 The Orange authors
+
+# Changes to architecture and to the build system need a review from the
+# architects team (see CONTRIBUTING.md and docs/adr/README.md).  Later
+# lines take precedence over earlier ones.
+
+/docs/adr/ @orange-xmpp/architects
+/docs/spec/ @orange-xmpp/architects
+/configure.ac @orange-xmpp/architects
+/Makefile.am @orange-xmpp/architects
+local.mk @orange-xmpp/architects
+/m4/orange_*.m4 @orange-xmpp/architects
+/autogen.sh @orange-xmpp/architects
+/.github/ @orange-xmpp/architects
+/.githooks/ @orange-xmpp/architects
