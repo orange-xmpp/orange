@@ -3,7 +3,7 @@
 
 # 0001. Error handling
 
-- **Status:** Accepted
+- **Status:** Proposed
 - **Date:** 2026-10-22
 - **Deciders:** mb6ockatf
 - **Issue:** #2
